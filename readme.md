@@ -7,6 +7,7 @@
 
 **文件内容查找-包含文件夹**
 `find /home/primeton -name "*" | xargs grep "12800" | grep "12800"`
+
 **文件内容查找-只查找文件**
 
 `find /home/primeton -type f -name "*" | xargs grep "T_DW_MATER_MIXPROPOR_COUNT" | grep "T_DW_MATER_MIXPROPOR_COUNT"`
