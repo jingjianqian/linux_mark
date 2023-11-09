@@ -102,7 +102,7 @@ update mysql.user set authentication_string=password('mysql1991Pswd') where user
 
 **mysql表空间管理**
 
-<!--表空间占比情况查询-->
+> 表空间占比情况查询
 
 ```sql
 SELECT a.tablespace_name "FNC_BAK_SPACE ",a.bytes / 1024 / 1024 /1023 "表空间大小(GB)",(a.bytes - b.bytes) / 1024 / 1024 / 1024  "已使用空间(GB)",
@@ -117,13 +117,13 @@ WHERE a.tablespace_name = b.tablespace_name
 ORDER BY ((a.bytes - b.bytes) / a.bytes) DESC;
 ```
 
-<!--表空间file文件情况查询-->
+> 表空间file文件情况查询
 
 ```SQL
 select tablespace_name, file_id,file_name, round(bytes/(1024*1024),0) total_space from dba_data_files t WHERE t.TABLESPACE_NAME  = 'SYSTEM' order by tablespace_name;
 ```
 
-<!--创建临时表空间-->
+> 创建临时表空间
 
 ```sql
 CREATE temporary  tablespace lowcode_bps_temp  tempfile '/home/oracle/oradata/appdb/lowcode/bps/lowcode_bps_temp01.dbf'  SIZE 32M AUTOEXTEND ON NEXT 32M MAXSIZE 4096M;
@@ -131,7 +131,7 @@ CREATE temporary  tablespace lowcode_bps_temp  tempfile '/home/oracle/oradata/ap
 CREATE   tablespace lowcode_bps  datafile '/home/oracle/oradata/appdb/lowcode/bps/lowcode_bps01.dbf'  SIZE 32M AUTOEXTEND ON NEXT 32M MAXSIZE 4096M;
 ```
 
-<!--表空间增加file文件-->
+> 表空间增加file文件
 
 ```sql
 alter tablespace SIP_DATA_TABLESPACE add datafile  '/home/oracle/oradata/appdb/sip/data16.dbf'  SIZE 32M AUTOEXTEND ON NEXT 32M MAXSIZE 4096M;
@@ -159,7 +159,8 @@ from v$temp_extent_pool GROUP by tablespace_name) d
 where c.tablespace_name = d.tablespace_name;
 ```
 
---表空间使用者查询
+> 表空间使用者查询
+>
 
 ```sql
 select a.username,
