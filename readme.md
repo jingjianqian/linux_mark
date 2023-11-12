@@ -22,7 +22,15 @@ find /home/primeton -type f -name "*" | xargs grep "T_DW_MATER_MIXPROPOR_COUNT" 
 find /home/primeton/di7.0/server/diserver/project -type f -name "*.*" | xargs grep "T_DWD_PRESPOT_CHECK_RATE*" | grep "T_DWD_PRESPOT_CHECK_RATE"
 ```
 
- 
+ **日志查看**
+
+> 查看frps服务的今天的日志 
+
+```
+journalctl -u frps --since "today"
+```
+
+
 
 ## 2.docker 
 
@@ -160,7 +168,6 @@ where c.tablespace_name = d.tablespace_name;
 ```
 
 > 表空间使用者查询
->
 
 ```sql
 select a.username,
@@ -174,3 +181,20 @@ select a.username,
    b.BYTES_FREE/1024/1024/1024  from   V$TEMPSEG_USAGE  a  join  V$TEMP_SPACE_HEADER b on   a.TABLESPACE=b.tablespace_name; 
 ```
 
+> LAG() 与 LEAD（）函数，常用与计算同比环比:其实就是排序号后上下错位，用哪个函数取决排序
+
+```sql
+   select 
+     test.id,
+     test.month, --202311
+     test.value,
+     lag(test.value) over (order by test.id,test.month) as PRE_MONTH_VALUE, --上个月的值
+     test.value - ag(test.value) over (order by test.id,test.month) as diff_to_last_month  --得到与上个月的差额，
+     lead(test.value) over (order by test.id,test.month) as forward_MONTH_VALUE --lead刚好相反，能拿到下个月的值，计算差额同理
+   from test
+   order by 
+    test.id,
+    test.month desc, --202312到202301每个月一条数据
+    test.value
+
+```
