@@ -26,8 +26,24 @@ find /home/primeton/di7.0/server/diserver/project -type f -name "*.*" | xargs gr
 
 > 查看frps服务的今天的日志 
 
-```
+```shell
 journalctl -u frps --since "today"
+```
+
+ **linux上连接其他mysql**
+
+> centos为例，切没有安装mysql
+
+1、安装mysql 客户端
+
+```shell
+yum install  mysql
+```
+
+2、连接mysql
+
+```shell
+mysql -h 192.168.1.23 -P 13306 -u username -p
 ```
 
 
