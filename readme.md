@@ -50,6 +50,12 @@ mysql -h 192.168.1.23 -P 13306 -u username -p
 
 ## 2.docker 
 
+**安装homeassistant:**
+
+```
+docker run -d  --name="hass" -v E:\data\appsData\docker\homeassistant\config:/config -p 8123:8123 homeassistant/home-assistant:latest 
+```
+
 **安装mysql:**
 
 ```shell
