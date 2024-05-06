@@ -50,9 +50,13 @@ mysql -h 192.168.1.23 -P 13306 -u username -p
 
 ## 2.docker 
 
+```dockerfile
+docker run -p 9000:9000 -p 9001:9001 -e "MINIO_ACCESS_KEY=admin" -e "MINIO_SECRET_KEY=password" minio/minio server /data --console-address ":9001" # /Users/yunai/minio 存储目录；--console-address 是 UI 界面的端口
+```
+
 **安装homeassistant:**
 
-```
+```dockerfile
 docker run -d  --name="hass" -v E:\data\appsData\docker\homeassistant\config:/config -p 8123:8123 homeassistant/home-assistant:latest 
 ```
 
